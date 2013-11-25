@@ -79,8 +79,11 @@ for File in sys.argv:
   # go through files and replace IDs from mapping
   for file in root.getiterator('{http://www.loc.gov/METS/}file'):
     # set ID to new (mapped) value
-    file.set('ID', idmap[file.get('ID')])
-    
+    try:
+      file.set('ID', idmap[file.get('ID')])
+    except KeyError:
+      print "A fileid not previously seen before encountered: '" + file.get('ID') + "'."
+      print "This means it must not a fileid for a page."
   # fix FLocat urls; remove "file:" from uri
   for flocat in root.getiterator('{http://www.loc.gov/METS/}FLocat'):
     flocat.attrib['{http://www.w3.org/1999/xlink}href'] = re.compile('file:').sub('', flocat.attrib['{http://www.w3.org/1999/xlink}href'])
