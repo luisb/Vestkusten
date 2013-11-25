@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import sys, re
-import xml.etree.ElementTree as ET
+import elementtree.ElementTree as ET
 
 if len(sys.argv) == 1:
   print "FATAL: vest.py expects to be passed at least one METS file."
