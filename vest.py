@@ -30,6 +30,11 @@ for File in sys.argv:
   register_namespace('xlink', "http://www.w3.org/1999/xlink")
   register_namespace('xsi', "http://www.w3.org/2001/XMLSchema-instance")  
   
+  # Make sure the mets type attribute is "Newspaper"
+  for mets in root.getiterator('{http://www.loc.gov/METS/}mets'):
+    if mets.attrib['TYPE'] != 'Newspaper':
+      mets.attrib['TYPE'] = 'Newspaper'
+
   # Go through structMap and find FILEIDs of master, ocr, and derivatives.
   # Store these since we need to change the structMap FILEIDs in structMap and 
   # fileSec FILE IDs in the fileSec to match using the same number per page.
