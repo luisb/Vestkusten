@@ -1,6 +1,11 @@
 #!/usr/bin/python
 import sys, re
-import elementtree.ElementTree as ET
+
+# try to find the right elementtree module
+try:
+  import elementtree.ElementTree as ET
+except ImportError:
+  import xml.etree.ElementTree as ET
 
 if len(sys.argv) == 1:
   print "FATAL: vest.py expects to be passed at least one METS file."
